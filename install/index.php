@@ -7,14 +7,14 @@ use Bitrix\Main\Application;
 Loc::loadMessages(__FILE__);
 
 
-class DsiHelpers extends CModule {
-    public string $MODULE_ID = 'dsi.helpers';
-    public string $MODULE_VERSION;
-    public string $MODULE_VERSION_DATE;
-    public string $MODULE_NAME;
-    public string $MODULE_DESCRIPTION;
-    public string $PARTNER_NAME;
-    public string $PARTNER_URI;
+class dsi_helpers extends CModule {
+    public $MODULE_ID = 'dsi.helpers';
+    public $MODULE_VERSION;
+    public $MODULE_VERSION_DATE;
+    public $MODULE_NAME;
+    public $MODULE_DESCRIPTION;
+    public $PARTNER_NAME;
+    public $PARTNER_URI;
 
 
     public function __construct() {
@@ -27,6 +27,12 @@ class DsiHelpers extends CModule {
         include $this->MODULE_PATH . '/install/version.php';
         $this->MODULE_VERSION = $arModuleVersion['VERSION'];
         $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
+    }
+
+    protected function getModulePath() : string {
+        $modulePath = explode('/', __FILE__);
+        $modulePath = array_slice($modulePath, 0, array_search($this->MODULE_ID, $modulePath) + 1);
+        return join('/', $modulePath);
     }
 
     public function doInstall() : void {
@@ -54,12 +60,12 @@ class DsiHelpers extends CModule {
 
     public function InstallEvents() : void {
         $eventManager = \Bitrix\Main\EventManager::getInstance();
-        $eventManager->registerEventHandlerCompatible("iblock", "OnIBlockPropertyBuildList",self::MODULE_ID,"\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
+        $eventManager->registerEventHandlerCompatible("iblock", "OnIBlockPropertyBuildList", $this->MODULE_ID, "\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
     }
 
     public function UnInstallEvents() : void {
         $eventManager = \Bitrix\Main\EventManager::getInstance();
-        $eventManager->unRegisterEventHandlerCompatible("iblock", "OnIBlockPropertyBuildList",self::MODULE_ID,"\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
+        $eventManager->unRegisterEventHandlerCompatible("iblock", "OnIBlockPropertyBuildList", $this->MODULE_ID, "\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
     }
 
     public function doUninstall() : void {

@@ -7,7 +7,7 @@ class Json {
         return [
             'PROPERTY_TYPE' => 'S',
             'USER_TYPE' => 'JSON',
-            'DESCRIPTION' => 'JSON',
+            'DESCRIPTION' => 'dsi: JSON',
             'GetPropertyFieldHtml' => [__CLASS__, 'GetPropertyFieldHtml'],
             'GetSettingsHTML' => [__CLASS__, 'GetSettingsHTML'],
             "ConvertToDB" => array(__CLASS__, "ConvertToDB"),
