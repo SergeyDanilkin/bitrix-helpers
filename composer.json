@@ -1,0 +1,16 @@
+{
+    "name": "dsi/helpers",
+    "description": "Bitrix helpers",
+    "type": "bitrix-d7-module",
+    "require": {
+        "composer/installers": "^2.2"
+    },
+	"authors": [
+        {
+            "name": "Sergey Danilkin",
+            "email": "danilkin.sergey@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT"
+}
