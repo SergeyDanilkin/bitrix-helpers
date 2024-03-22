@@ -65,7 +65,7 @@ class dsi_helpers extends CModule {
 
     public function UnInstallEvents() : void {
         $eventManager = \Bitrix\Main\EventManager::getInstance();
-        $eventManager->unRegisterEventHandlerCompatible("iblock", "OnIBlockPropertyBuildList", $this->MODULE_ID, "\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
+        $eventManager->unRegisterEventHandler("iblock", "OnIBlockPropertyBuildList", $this->MODULE_ID, "\\Dsi\\Helpers\\Iblock\\CustomProperties\\Json", "GetUserTypeDescription");
     }
 
     public function doUninstall() : void {
